@@ -1,0 +1,39 @@
+class BinaryAddition {
+
+    static String b1 = "10001";
+    static String b2 = "11001";
+
+    public static void main(String[] args) {
+        StringBuilder result = new StringBuilder();
+        int carry = 0;
+
+        int maxLength = Math.max(b1.length(), b2.length());
+
+        for (int i = 0; i < maxLength; i++) {
+            int bit1 = getBit(b1, i);
+            int bit2 = getBit(b2, i);
+
+            int sum = bit1 + bit2 + carry;
+            result.insert(0, sum % 2);
+
+            carry = sum / 2;
+        }
+
+        if (carry != 0) {
+            result.insert(0, carry);
+        }
+
+        System.out.println(result);
+    }
+
+  static int getBit(String binary, int position) {
+    if (position < binary.length()) {
+        char bitChar = binary.charAt(binary.length() - 1 - position);
+        int bitValue = Character.getNumericValue(bitChar);
+        return bitValue;
+    } else {
+        return 0;
+    }
+}
+
+}
